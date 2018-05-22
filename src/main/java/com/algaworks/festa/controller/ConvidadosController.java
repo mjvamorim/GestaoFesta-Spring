@@ -1,7 +1,11 @@
 package com.algaworks.festa.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,5 +33,22 @@ public class ConvidadosController {
 	public String salvar(Convidado convidado) {
 		this.convidados.save(convidado);
 		return "redirect:/convidados";
+	}
+
+	@RequestMapping(value ="/excluir/{id}")
+	public String excluirConvidadoByPathVariable(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
+	{
+		this.convidados.deleteById(id);
+		return "redirect:/convidados";
+	}
+	
+	@RequestMapping(value ="/alterar/{id}")
+	public ModelAndView alterarConvidadoByPathVariable(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response)
+	{
+		ModelAndView mv = new ModelAndView("ListaConvidados");
+		Convidado convidado = convidados.getOne(id);
+		mv.addObject(convidado);
+		mv.addObject("convidados", convidados.findAll());
+		return (mv);
 	}
 }

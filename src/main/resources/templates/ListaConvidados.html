@@ -22,11 +22,12 @@
 			    th:action="@{/convidados}"
 				style="margin: 20px 0">
 				<div class="form-group">
+					<input type="hidden" th:field="*{id}">
 					<input type="text" class="form-control" placeholder="Nome"
 						th:field="*{nome}" /> 
 					<input type="text" class="form-control"
 						placeholder="Acompanhantes" th:field="*{quantidadeAcompanhantes}" />
-					<button type="submit" class="btn btn-primary">Adicionar</button>
+					<button type="submit" class="btn btn-secondary">Adicionar</button>
 				</div>
 			</form>
 			<table class="table">
@@ -34,12 +35,22 @@
 					<tr>
 						<th>Nome</th>
 						<th>Acompanhantes</th>
+						<th colspan=2> Ação </th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="convidado : ${convidados}">
 						<td th:text="${convidado.nome}">João</td>
 						<td th:text="${convidado.quantidadeAcompanhantes}">3</td>
+						
+						<td>
+						<a th:href="@{/convidados/alterar/}+${convidado.id}" class="glyphicon glyphicon­‐pencil">Alterar</a>
+						</td>
+						<td>
+						<a th:href="@{/convidados/excluir/}+${convidado.id}" 
+						   class="glyphicon glyphicon­‐trash">Excluir</a>
+						</td>
+						
 					</tr>
 				</tbody>
 			</table>
