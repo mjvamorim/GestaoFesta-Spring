@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.algaworks.festa.model.Convidado;
 import com.algaworks.festa.repository.Convidados;
+
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Controller
 @RequestMapping("/convidados")
@@ -50,5 +53,10 @@ public class ConvidadosController {
 		mv.addObject(convidado);
 		mv.addObject("convidados", convidados.findAll());
 		return (mv);
+	}
+	
+	@Bean
+	public LayoutDialect layoutDialect() {
+	    return new LayoutDialect();
 	}
 }
