@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.algaworks.festa.model.Convidado;
 import com.algaworks.festa.repository.Convidados;
+import com.algaworks.festa.repository.Festas;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
@@ -23,13 +24,16 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 public class ConvidadosController {
 
 	@Autowired
-	private Convidados convidados;
-
+	private Convidados convidados; 
+	
+	@Autowired
+	private Festas festas;
 
 	@RequestMapping("")
 	public ModelAndView listar() {
 		ModelAndView mv = new ModelAndView("ListaConvidados");
 		mv.addObject(new Convidado());
+		mv.addObject("festas",festas.findAll());
 		mv.addObject("convidados", convidados.findAll());
 		return (mv);
 	}

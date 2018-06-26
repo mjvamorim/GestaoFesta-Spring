@@ -7,50 +7,40 @@
 <section layout:fragment="Conteudo">
 	<div class="panel panel-default" style="margin: 10px">
 		<div class="panel-heading">
-			<h1 class="panel-title">Lista de convidados</h1>
+			<h1 class="panel-title">Lista de festas</h1>
 		</div>
 		<div class="panel-body">
 			<form class="form-inline" method="POST" 
-			    th:object="${convidado}"
-			    th:action="@{/convidados}"
+			    th:object="${festa}"
+			    th:action="@{/festas}"
 				style="margin: 20px 0">
 				<div class="form-group">
 					<input type="hidden" th:field="*{id}">
-					<select class="form-control"  id="festa" th:field="*{festa}">
-							<option th:each="f : ${festas}" th:value="${f.id}" th:text="${f.nome}">
-							</option>
-	                    </select>
 					<input type="text" class="form-control" placeholder="Nome"
 						th:field="*{nome}" /> 
-					<input type="text" class="form-control"
-						placeholder="Acompanhantes" th:field="*{quantidadeAcompanhantes}" />
 					<button type="submit" class="btn btn-primary">Adicionar</button>
 				</div>
 			</form>
 			<table class="table">
 				<thead>
 					<tr>
+						<th>#</th>
 						<th>Nome</th>
-						<th>Acompanhantes</th>
-						<th>Festa</th>
-		   					
 						<th colspan=2> Ação </th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="convidado : ${convidados}">
-						<td th:text="${convidado.nome}">João</td>
-						<td th:text="${convidado.quantidadeAcompanhantes}">3</td>
-						<td th:text="${convidado.festa.nome}"></td>
-		   					
-						<td>
-						<a th:href="@{/convidados/alterar/}+${convidado.id}" class="glyphicon glyphicon-pencil"> </a>
-						</td>
-						<td>
-						<a th:href="@{/convidados/excluir/}+${convidado.id}" 
-						   class="glyphicon glyphicon-trash"> </a>
-						</td>
+					<tr th:each="festa : ${festas}">
+						<td th:text="${festa.id}">João</td>
+						<td th:text="${festa.nome}">João</td>
 						
+						<td>
+						<a th:href="@{/festas/alterar/}+${festa.id}" class="glyphicon glyphicon-pencil"> </a>
+						</td>
+						<td>
+						<a th:href="@{/festas/excluir/}+${festa.id}" 
+						   class="glyphicon glyphicon-trash"> </a>
+						</td>		
 					</tr>
 				</tbody>
 			</table>

@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Convidado {
@@ -13,6 +16,10 @@ public class Convidado {
 	private Long id;
 	private String nome;
 	private Integer quantidadeAcompanhantes;
+	
+	@ManyToOne
+    @JoinColumn(name = "festa_id")
+	private Festa festa;
 	
 	
 	public Long getId() {
@@ -32,6 +39,12 @@ public class Convidado {
 	}
 	public void setQuantidadeAcompanhantes(Integer quantidadeAcompanhantes) {
 		this.quantidadeAcompanhantes = quantidadeAcompanhantes;
+	}
+	public Festa getFesta() {
+		return festa;
+	}
+	public void setFesta(Festa festa) {
+		this.festa = festa;
 	}
 
 }
