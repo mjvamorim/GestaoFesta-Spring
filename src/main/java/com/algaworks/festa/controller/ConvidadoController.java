@@ -21,7 +21,7 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Controller
 @RequestMapping("/convidados")
-public class ConvidadosController {
+public class ConvidadoController {
 
 	@Autowired
 	private Convidados convidados; 
