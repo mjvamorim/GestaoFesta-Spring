@@ -12,6 +12,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @SuppressWarnings("deprecation")
 @Entity
@@ -25,8 +27,9 @@ public class Festa {
 	@Size(max = 30, message = "O Nome não pode conter mais de 30 caracteres")
 	private String nome;
 	
-	//@OneToMany(mappedBy = "festa", cascade = CascadeType.ALL)
-	//private Set<Convidado> convidados;
+	@JsonIgnore
+	@OneToMany(mappedBy = "festa", cascade = CascadeType.ALL)
+	private Set<Convidado> convidados;
 	
 	
 	public Long getId() {
@@ -42,12 +45,12 @@ public class Festa {
 		this.nome = nome;
 	}
 	
-	//public Set<Convidado> getConvidados() {
-	//	return convidados;
-	//}
-	//public void setConvidados(Set<Convidado> convidados) {
-	//	this.convidados = convidados;
-	//}
+	public Set<Convidado> getConvidados() {
+		return convidados;
+	}
+	public void setConvidados(Set<Convidado> convidados) {
+		this.convidados = convidados;
+	}
 	
 	
 }

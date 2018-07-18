@@ -13,8 +13,4 @@ public class GestaoFestaController {
 		ModelAndView mv = new ModelAndView("Home");
 		return (mv);
 	}
-
-
-	
-
 }
