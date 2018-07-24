@@ -19,23 +19,36 @@ import com.algaworks.festa.repository.Convidados;
 @RestController
 @RequestMapping("/api/convidados")
 public class ApiConvidadoController {
-	
+
 	@Autowired
 	private Convidados convidados;
-	
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public Collection<Convidado> listaConvidados() {
-	   return convidados.findAll();
+		return convidados.findAll();
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Optional<Convidado> getConvidado(@PathVariable("id") Long id) {
 		return this.convidados.findById(id);
 	}
-	
-	 @RequestMapping(value = "/all", method = RequestMethod.GET)
-	  public ResponseEntity<List<Convidado>> listar() {
-	    return new ResponseEntity<List<Convidado>>(new ArrayList<Convidado>(convidados.findAll()), 
-	    		HttpStatus.OK);
-	  }
+
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public ResponseEntity<List<Convidado>> listar() {
+		return new ResponseEntity<List<Convidado>>(new ArrayList<Convidado>(convidados.findAll()), 
+				HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
+	public Optional<Convidado> removeConvidado(@PathVariable("id") Long id) {
+		Optional<Convidado> c = convidados.findById(id);
+		convidados.deleteById(id);
+		return c;
+	}
+
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public  Convidado saveConvidado(Convidado c) {
+		return convidados.save(c);
+	}
+
 }
