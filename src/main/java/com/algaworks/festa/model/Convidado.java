@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Convidado {
@@ -15,7 +17,8 @@ public class Convidado {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private Integer quantidadeAcompanhantes;
+	private Integer acompanhantes;
+	
 	
 	@ManyToOne
     @JoinColumn(name = "festa_id")
@@ -34,11 +37,11 @@ public class Convidado {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Integer getQuantidadeAcompanhantes() {
-		return quantidadeAcompanhantes;
+	public Integer getAcompanhantes() {
+		return acompanhantes;
 	}
-	public void setQuantidadeAcompanhantes(Integer quantidadeAcompanhantes) {
-		this.quantidadeAcompanhantes = quantidadeAcompanhantes;
+	public void setAcompanhantes(Integer acompanhantes) {
+		this.acompanhantes = acompanhantes;
 	}
 	public Festa getFesta() {
 		return festa;

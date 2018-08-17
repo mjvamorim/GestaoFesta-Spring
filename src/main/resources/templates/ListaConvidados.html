@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorator="LayoutPadrao">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
 
 <section layout:fragment="Conteudo">
 	<div class="panel panel-default" style="margin: 10px">
@@ -10,20 +10,15 @@
 			<h1 class="panel-title">Lista de convidados</h1>
 		</div>
 		<div class="panel-body">
-			<form class="form-inline" method="POST" 
-			    th:object="${convidado}"
-			    th:action="@{/convidados}"
-				style="margin: 20px 0">
+			<form class="form-inline" method="POST" th:object="${convidado}"
+				th:action="@{/convidados}" style="margin: 20px 0">
 				<div class="form-group">
-					<input type="hidden" th:field="*{id}">
-					<select class="form-control"  id="festa" th:field="*{festa}">
-							<option th:each="f : ${festas}" th:value="${f.id}" th:text="${f.nome}">
-							</option>
-	                    </select>
-					<input type="text" class="form-control" placeholder="Nome"
-						th:field="*{nome}" /> 
-					<input type="text" class="form-control"
-						placeholder="Acompanhantes" th:field="*{quantidadeAcompanhantes}" />
+					<input type="hidden" th:field="*{id}"> 
+					<select class="form-control" id="festa" th:field="*{festa}">
+						<option th:each="f : ${festas}" th:value="${f.id}" th:text="${f.nome}"></option>
+					</select> 
+					<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}" /> 
+					<input type="text" class="form-control" placeholder="Acompanhantes" th:field="*{acompanhantes}" />
 					<button type="submit" class="btn btn-primary">Adicionar</button>
 				</div>
 			</form>
@@ -33,28 +28,25 @@
 						<th>Nome</th>
 						<th>Acompanhantes</th>
 						<th>Festa</th>
-		   					
-						<th colspan=2> Ação </th>
+
+						<th colspan=2>Ação</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="convidado : ${convidados}">
 						<td th:text="${convidado.nome}">João</td>
-						<td th:text="${convidado.quantidadeAcompanhantes}">3</td>
+						<td th:text="${convidado.acompanhantes}">3</td>
 						<td th:text="${convidado.festa.nome}"></td>
-		   					
-						<td>
-						<a th:href="@{/convidados/alterar/}+${convidado.id}" class="glyphicon glyphicon-pencil"> </a>
-						</td>
-						<td>
-						<a th:href="@{/convidados/excluir/}+${convidado.id}" 
-						   class="glyphicon glyphicon-trash"> </a>
-						</td>
-						
+
+						<td><a th:href="@{/convidados/alterar/}+${convidado.id}"
+							class="glyphicon glyphicon-pencil"> </a></td>
+						<td><a th:href="@{/convidados/excluir/}+${convidado.id}"
+							class="glyphicon glyphicon-trash"> </a></td>
+
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
 </section>
-</html>	
+</html>
